@@ -25,13 +25,13 @@ Or [download as ZIP](https://github.com/koddsson/made-with-love/archive/master.z
 2. Import custom element:
 
     ```html
-    <link rel="import" href="bower_components/made-with-love/my-element.html">
+    <link rel="import" href="bower_components/made-with-love/made-with-love.html">
     ```
 
 3. Start using it!
 
     ```html
-    <my-element></my-element>
+    <made-with-love></made-with-love>
     ```
 
 ## Options
