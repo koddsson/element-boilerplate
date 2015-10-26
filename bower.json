@@ -1,9 +1,9 @@
 {
-    "name": "my-repo",
+    "name": "made-with-love",
     "version": "0.0.0",
-    "description": "My awesome Custom Element",
+    "description": "Made with love banner for your site",
     "license": "MIT",
-    "main": "my-element.html",
+    "main": "made-with-love.html",
     "keywords": [
         "web-components"
     ],

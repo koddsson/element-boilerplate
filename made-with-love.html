@@ -1,0 +1,73 @@
+<template>
+  <style>
+    p {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      font-size: 11px;
+      padding-right: 10px;
+    }
+  </style>
+  <p>
+    <span class="action">Handcrafted</span> with 💖
+    <span style="display:none;" class="poweredBy"> Powered by the <a class="link" href="https://bokun.io/">Bókun Platform</a></span>.
+  </p>
+</template>
+
+<script>
+  (function() {
+    // Refers to the "importer", which is index.html
+    var thatDoc = document;
+    // Refers to the "importee", which is src/hello-world.html
+    var thisDoc =  (thatDoc._currentScript || thatDoc.currentScript).ownerDocument;
+    // Gets content from <template>
+    var template = thisDoc.querySelector('template').content;
+
+    // Creates an object based in the HTML Element prototype
+    var element = Object.create(HTMLElement.prototype);
+
+    // Fires when an instance of the element is created
+    element.createdCallback = function() {
+      var shadowRoot = this.createShadowRoot();
+
+      var clone = thatDoc.importNode(template, true);
+      shadowRoot.appendChild(clone);
+
+      this.action = shadowRoot.querySelector('.action');
+      this.poweredBy = shadowRoot.querySelector('.poweredBy');
+
+      if (this.hasAttribute('action')) {
+        this.setAction(this.getAttribute('action'));
+      }
+
+      if (this.hasAttribute('powered-by-link') && this.hasAttribute('powered-by-label')) {
+        this.setPoweredBy(this.getAttribute('powered-by-link'), this.getAttribute('powered-by-label'));
+      }
+    };
+
+    // Fires when an instance was inserted into the document
+    element.attachedCallback = function() {};
+
+    // Fires when an instance was removed from the document
+    element.detachedCallback = function() {};
+
+    // Fires when an attribute was added, removed, or updated
+    element.attributeChangedCallback = function(attr, oldVal, newVal) {};
+
+    element.setAction = function(action) {
+      this.action.textContent = action;
+    };
+
+    element.setPoweredBy = function(link, label) {
+      this.poweredBy.style.display = 'inline';
+
+      this.poweredBy.querySelector('a').href = link;
+      this.poweredBy.querySelector('a').textContent = label;
+    }
+
+    // Registers custom element
+    document.registerElement('made-with-love', {
+      prototype: element
+    });
+  }());
+</script>
